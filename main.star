@@ -1,23 +1,55 @@
-# NOTE: If you're a VSCode user, you might like our VSCode extension: https://marketplace.visualstudio.com/items?itemName=Kurtosis.kurtosis-extension
+mongodb = import_module("github.com/kurtosis-tech/mongodb-package/main.star")
+express_backend = import_module("/backend/backend.star")
 
-# Importing the Postgres package from the web using absolute import syntax
-# See also: https://docs.kurtosis.com/starlark-reference/import-module
-postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
-
-# Importing a file inside this package using relative import syntax
-# See also: https://docs.kurtosis.com/starlark-reference/import-module
 lib = import_module("./lib/lib.star")
 
-# For more information on...
-#  - the 'run' function:  https://docs.kurtosis.com/concepts-reference/packages#runnable-packages
-#  - the 'plan' object:   https://docs.kurtosis.com/starlark-reference/plan
-#  - arguments:           https://docs.kurtosis.com/run#arguments
-def run(plan, name = "John Snow"):
-    plan.print("Hello, " + name)
 
-    # https://docs.kurtosis.com/starlark-reference/plan#upload_files
-    config_json = plan.upload_files("./static-files/config.json")
+def run(plan, args):
 
-    lib.run_hello(plan, config_json)
+    # Creating the database
 
-    postgres.run(plan)
+    mongo_service_name = args["mongo_config"]["name"]
+    mongo_user_name = args["mongo_config"]["root_user"]
+    mongo_user_password = args["mongo_config"]["root_password"]
+    mongo_backend_db_name = args["mongo_config"]["backend_db_name"]
+    mongo_backend_user = args["mongo_config"]["backend_user"]
+    mongo_backend_password = args["mongo_config"]["backend_password"]
+
+    mongodb_module_output = mongodb.run(plan, args["mongo_config"])
+    mongodb_service_port = mongodb_module_output.service.ports['mongodb'].number
+
+
+    # create backend user and db
+    command_create_user = "db.getSiblingDB('%s').createUser({user:'%s', pwd:'%s', roles:[{role:'readWrite',db:'%s'}]});" % (
+        mongo_backend_db_name, mongo_backend_user, mongo_backend_password, mongo_backend_db_name
+    )
+    exec_create_user = ExecRecipe(
+        command = [
+            "mongosh",
+            "-u",
+            mongo_user_name,
+            "-p",
+            mongo_user_password,
+            "-eval",
+            command_create_user
+        ],
+    )
+    plan.wait(
+        service_name = mongodb_module_output.service.name,
+        recipe = exec_create_user,
+        field = "code",
+        assertion = "==",
+        target_value = 0,
+        timeout = "30s",
+    )
+
+    mongodb_url = "mongodb://%s:%s@%s:%d/%s" % (
+        mongo_backend_user,
+        mongo_backend_password,
+        mongo_service_name,
+        mongodb_service_port,
+        mongo_backend_db_name,
+    )
+    # DB creation finished
+
+    express_backend.run(plan, mongodb_url)
