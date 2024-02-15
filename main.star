@@ -1,21 +1,22 @@
+utils = import_module("/utils/utils.star")
 mongodb = import_module("github.com/kurtosis-tech/mongodb-package/main.star")
 express_backend = import_module("/backend/backend.star")
-
-lib = import_module("./lib/lib.star")
-
+frontend = import_module("/frontend/frontend.star")
 
 def run(plan, args):
 
     # Creating the database
 
-    mongo_service_name = args["mongo_config"]["name"]
-    mongo_user_name = args["mongo_config"]["root_user"]
-    mongo_user_password = args["mongo_config"]["root_password"]
-    mongo_backend_db_name = args["mongo_config"]["backend_db_name"]
-    mongo_backend_user = args["mongo_config"]["backend_user"]
-    mongo_backend_password = args["mongo_config"]["backend_password"]
+    package_config = utils.get_package_config_from_args(args)
 
-    mongodb_module_output = mongodb.run(plan, args["mongo_config"])
+    mongo_service_name = package_config.mongo_config["name"]
+    mongo_user_name = package_config.mongo_config["root_user"]
+    mongo_user_password = package_config.mongo_config["root_password"]
+    mongo_backend_db_name = package_config.mongo_config["backend_db_name"]
+    mongo_backend_user = package_config.mongo_config["backend_user"]
+    mongo_backend_password = package_config.mongo_config["backend_password"]
+
+    mongodb_module_output = mongodb.run(plan, package_config.mongo_config)
     mongodb_service_port = mongodb_module_output.service.ports['mongodb'].number
 
 
@@ -52,4 +53,8 @@ def run(plan, args):
     )
     # DB creation finished
 
-    express_backend.run(plan, mongodb_url)
+    be_http_public_port = package_config.backend_service_config["http_public_port"]
+
+    backend_service = express_backend.run(plan, mongodb_url, be_http_public_port)
+
+    frontend.run(plan, backend_service, be_http_public_port)

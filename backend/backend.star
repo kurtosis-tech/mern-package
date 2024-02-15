@@ -1,6 +1,4 @@
-def run(plan, mongodb_url):
-    # Creating and starting the backend
-
+def run(plan, mongodb_url, backend_http_public_port):
     # upload server files
     server_files = plan.upload_files(
         src = "./files/",
@@ -24,8 +22,8 @@ def run(plan, mongodb_url):
         name = "server-constants",
     )
 
-    backend_service_config = ServiceConfig(
-		image = "node:latest",
+    service_config = ServiceConfig(
+		image = "node:16.14.2",
         files = {
             "/server/files" : Directory(
                 artifact_names = [server_files],
@@ -33,7 +31,7 @@ def run(plan, mongodb_url):
             "/server/constants" : server_constants,
         },
         entrypoint = ["sh", "-c"],
-        cmd = ["cd /server/files/ && npm i  && npm start"],
+        cmd = ["cd /server/files/ && npm i && npm start"],
         ports = {
             "http": PortSpec(
                 number = 8080,
@@ -41,11 +39,18 @@ def run(plan, mongodb_url):
                 application_protocol = "http",
             ),
         },
+        public_ports = {
+            "http": PortSpec(
+                number = backend_http_public_port,
+                transport_protocol = "TCP",
+                application_protocol = "http",
+            ),
+        }
 	)
 
-    backend = plan.add_service(
+    backend_service = plan.add_service(
         name = "express-backend",
-        config = backend_service_config,
+        config = service_config,
     )
 
-    # Backend started
+    return backend_service
