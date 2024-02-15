@@ -45,4 +45,3 @@ def run(plan, config):
     )
 
     return  mongodb_url
-    

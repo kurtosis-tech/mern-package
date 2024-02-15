@@ -34,7 +34,7 @@ To blow away the created [enclave][enclaves-reference], run `kurtosis clean -a`.
 ### Step 3
 
 You can access to the application in the browser by clicking or copying the `react-frontend` address printed at the end of the package execution, in the `Ports` colum inside the `User Services` section
-<img alt="frontend address example" src="./readme-files/frontend-address.png"></img>
+<img alt="frontend address example" src="./readme-files/frontend-address.png" />
 
 ## How to create your own MERN application based on this package?
 
