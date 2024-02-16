@@ -24,7 +24,6 @@ def run(plan, backend_service, backend_http_public_port):
                 number=3000,
                 transport_protocol="TCP",
                 application_protocol="http",
-                wait=None,
             ),
         },
         env_vars={
