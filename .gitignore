@@ -92,3 +92,12 @@ tsconfig.tsbuildinfo
 # Generated files
 .docusaurus
 .cache-loader
+
+
+# Package config file
+static-files/config.json
+config.json
+static-files/config.yml
+config.yml
+static-files/config.yaml
+config.yaml

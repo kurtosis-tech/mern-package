@@ -1,2 +1,3 @@
-# TODO replace this with your Github username and this repo's name!
-name: "github.com/kurtosis-tech/package-template-repo"
+name: "github.com/kurtosis-tech/mern-package"
+description: |
+  This is a Kurtosis MERN template package you can use to create your own MERN project.
