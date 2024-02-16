@@ -8,26 +8,26 @@ This is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis/) MERN package yo
 
 Create the package's configuration file to set your custom values to run the package.
 
-Duplicate the `example-config.json` file and rename it to `config.json`.
+Duplicate the `example-config.yml` file and rename it to `config.yml`.
 
 ```bash
 # in the package's root
-cp ./example-config.json ./config.json
+cp ./example-config.yml ./config.yml
 ```
 
-Fill the created `config.json` file with your custom values.
+Fill the created `config.yml` file with your custom values.
 
-Make sure to not commit or include this file in the repository history (for serurity reasons dude it contains private credentials), you can check that the `config.json` was added into the `.gitignore` file.
+Make sure to not commit or include this file in the repository history (for serurity reasons dude it contains private credentials), you can check that the `config.yml` was added into the `.gitignore` file.
 
 ### Step 2
 
 If you have [Kurtosis installed][install-kurtosis], run:
 
 ```bash
-kurtosis run github.com/kurtosis-tech/mern-package --args-file config.json
+kurtosis run github.com/kurtosis-tech/mern-package --args-file config.yml
 ```
 
-If you don't have Kurtosis installed, [click here to run this package on the Kurtosis playground](https://gitpod.io/?autoStart=true&editor=code#https://github.com/kurtosis-tech/playground-gitpod).
+If you don't have Kurtosis installed, [click here to run this package on the Kurtosis cloud](https://cloud.kurtosis.com/).
 
 To blow away the created [enclave][enclaves-reference], run `kurtosis clean -a`.
 

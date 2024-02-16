@@ -3,8 +3,8 @@ database = import_module("/database/database.star")
 express_backend = import_module("/backend/backend.star")
 frontend = import_module("/frontend/frontend.star")
 
-def run(plan, args):
 
+def run(plan, args):
     # get configurations
     package_config = utils.get_package_config_from_args(args)
 
