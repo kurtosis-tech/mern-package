@@ -15,7 +15,7 @@ def run(plan, backend_service, backend_http_public_port):
         },
         entrypoint=["sh", "-c"],
         cmd=[
-            "cd /frontend/files/ && echo \"export const BACKEND_URL = '{}' \" > ./src/constants/index.js && npm i && npm start".format(
+            "cd /frontend/files/ && mkdir ./src/constants && echo \"export const BACKEND_URL = '{}' \" > ./src/constants/index.js && npm i && npm start".format(
                 backend_url
             )
         ],
