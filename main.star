@@ -7,10 +7,40 @@ frontend = import_module("/frontend/frontend.star")
 def run(plan, mongo_config = None, backend_service_config = None):
     """
     Starts this MERN example application.
-
+    
     Args:
-        mongo_config (json): The Mongo db configs to start the db service.
-        backend_service_config (json): The configs to start the backend service.
+        mongo_config (json): The Mongo db configs to start the db service. If empty, the database will start with default settings.
+            ```
+            {
+                # the name of the Mongo db service (default: mongo-db)
+                "name": "mongo-db",
+
+                # the container image and label used to create the service (default: mongo:6.0.5)
+                "image": "mongo:6.0.5",
+
+                # the Mongo's root user name (default: root)
+                "root_user": "root",
+
+                # the Mongo's root user password (default: root-password)
+                "root_password": "root-password",
+
+                # the name of the backend service's db (default: backend-db)
+                "backend_db_name": "backend-db",
+
+                # the name of user created for managing the backend service's db (default: backend-user)
+                "backend_user": "backend-user",
+
+                # the name of user created for managing the backend service's db (default: backend-password)
+                "backend_password": "backend-password",
+            }
+           ```
+        backend_service_config (json): The configs to start the backend service. If empty, the database will start with default settings.
+            ```
+           {
+                # the name of the Mongo db service (default: 65535)
+                "http_public_port": 65535,
+            }
+            ```
     """
 
     # get configurations
