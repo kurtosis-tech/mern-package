@@ -5,9 +5,11 @@ frontend = import_module("/frontend/frontend.star")
 
 
 def run(plan, mongo_config = None, backend_service_config = None):
-    """Starts this MERN example application.
+    """
+    Starts this MERN example application.
+    
     Args:
-        mongo_config(json): The Mongo db configs to start the db service.
+        mongo_config (json): The Mongo db configs to start the db service.
             ```
             {
                 # the name of the Mongo db service (default: mongo-db)
@@ -32,7 +34,7 @@ def run(plan, mongo_config = None, backend_service_config = None):
                 "backend_password": "backend-password",
             }
            ```
-        backend_service_config(json): The configs to start the backend service.
+        backend_service_config (json): The configs to start the backend service.
             ```
            {
                 # the name of the Mongo db service (default: 65535)
