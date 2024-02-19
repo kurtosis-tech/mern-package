@@ -31,14 +31,14 @@ def run(plan, mongo_config = None, backend_service_config = None):
                 "backend_user": "backend-user",
 
                 # the name of user created for managing the backend service's db (default: backend-password)
-                "backend_password": "backend-password",
+                "backend_password": "backend-password"
             }
-           ```
+            ```
         backend_service_config (json): The configs to start the backend service. If empty, the database will start with default settings.
             ```
-           {
+            {
                 # the name of the Mongo db service (default: 65535)
-                "http_public_port": 65535,
+                "http_public_port": 65535
             }
             ```
     """
