@@ -22,7 +22,10 @@ Find the package in the catalog and press the `run` button
 <br />
 <img alt="frontend address example" src="./readme-files/mern-in-catalog.png" />
 <br />
-<img alt="run Kurtosis MERN package in Kurtosis cloud" src="./readme-files/mern-package-run-small.gif" />
+<br />
+
+This screen record shows the entire run worflow:
+<img alt="run Kurtosis MERN package in Kurtosis cloud" src="./readme-files/mern-package-run.gif" />
 
 ### Using the Kurtosis CLI
 
