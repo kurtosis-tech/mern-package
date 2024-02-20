@@ -4,7 +4,35 @@ This is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis/) MERN package yo
 
 ## How to run this MERN example package?
 
-### Step 1
+### In Kurtosis cloud
+
+You can run this package very easily from the [Kurtosis cloud](https://cloud.kurtosis.com/)
+
+#### Step 1
+
+Install [Kurtosis][install-kurtosis]
+
+#### Step 2
+
+Login into the [Kurtosis cloud](https://cloud.kurtosis.com/)
+
+#### Step 3
+
+Find the package in the catalog and press the `run` button
+<br />
+<img alt="frontend address example" src="./readme-files/mern-in-catalog.png" />
+<br />
+<img alt="run Kurtosis MERN package in Kurtosis cloud" src="./readme-files/mern-package-run-small.gif" />
+
+### Using the Kurtosis CLI
+
+You can run this package also with the Kurtosis CLI.
+
+#### Step 1
+
+Install [Kurtosis][install-kurtosis]
+
+#### Step 2
 
 Create the package's configuration file to set your custom values to run the package.
 
@@ -19,21 +47,20 @@ Fill the created `config.yml` file with your custom values.
 
 Make sure to not commit or include this file in the repository history (for serurity reasons dude it contains private credentials), you can check that the `config.yml` was added into the `.gitignore` file.
 
-### Step 2
+#### Step 3
 
-If you have [Kurtosis installed][install-kurtosis], run:
+Use the `run` command to execute the package:
 
 ```bash
 kurtosis run github.com/kurtosis-tech/mern-package --args-file config.yml
 ```
 
-If you don't have Kurtosis installed, [click here to run this package on the Kurtosis cloud](https://cloud.kurtosis.com/).
-
 To blow away the created [enclave][enclaves-reference], run `kurtosis clean -a`.
 
-### Step 3
+#### Step 4
 
 You can access to the application in the browser by clicking or copying the `react-frontend` address printed at the end of the package execution, in the `Ports` colum inside the `User Services` section
+<br />
 <img alt="frontend address example" src="./readme-files/frontend-address.png" />
 
 ## How to create your own MERN application based on this package?
