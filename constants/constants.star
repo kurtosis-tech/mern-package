@@ -1,3 +1,11 @@
-DEFAULT_MONGO_CONFIG = {"name": "mongo-db", "image": "mongo:6.0.5", "root_user": "root",  "root_password": "password", "backend_db_name": "backend-db", "backend_user": "backend", "backend_password": "backend"}
+# mongo
+DEFAULT_MONGO_SERVICE_NAME = "mongo-db"
+DEFAULT_MONGO_IMAGE = "mongo:6.0.5"
+DEFAULT_MONGO_ROOT_USER = "root"
+DEFAULT_MONGO_ROOT_PASSWORD = "password"
+DEFAULT_BACKEND_DB_NAME = "backend-db"
+DEFAULT_BACKEND_DB_USER = "backend"
+DEFAULT_BACKEND_DB_PASSWORD = "backend"
 
-DEFAULT_BACKEND_SERVICE_CONFIG = {"http_public_port": 65535}
+# backend service
+DEFAULT_BACKEND_HTTP_PUBLIC_PORT = 65535

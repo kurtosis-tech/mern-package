@@ -1,13 +1,25 @@
 mongodb = import_module("github.com/kurtosis-tech/mongodb-package/main.star")
 
 
-def run(plan, config):
-    mongo_service_name = config["name"]
-    mongo_user_name = config["root_user"]
-    mongo_user_password = config["root_password"]
-    mongo_backend_db_name = config["backend_db_name"]
-    mongo_backend_user = config["backend_user"]
-    mongo_backend_password = config["backend_password"]
+def run(
+    plan,
+    mongo_service_name,
+    mongo_image,
+    mongo_user_name,
+    mongo_user_password,
+    mongo_backend_db_name,
+    mongo_backend_user,
+    mongo_backend_password,
+):
+    config = {
+        "name": mongo_service_name,
+        "image": mongo_image,
+        "root_user": mongo_user_name,
+        "root_password": mongo_user_password,
+        "backend_db_name": mongo_backend_db_name,
+        "backend_user": mongo_backend_user,
+        "backend_password": mongo_backend_password,
+    }
 
     mongodb_module_output = mongodb.run(plan, config)
     mongodb_service_port = mongodb_module_output.service.ports["mongodb"].number
