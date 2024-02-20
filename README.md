@@ -24,7 +24,7 @@ Find the package in the catalog and press the `run` button
 <br />
 <br />
 
-This screen record shows the entire run worflow:
+This screen record shows the entire run workflow:
 <img alt="run Kurtosis MERN package in Kurtosis cloud" src="./readme-files/mern-package-run.gif" />
 
 ### Using the Kurtosis CLI
