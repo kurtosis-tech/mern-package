@@ -14,4 +14,4 @@ jobs:
               with:
                 path: "."
                 cloud_instance_id: 086cc74ce8434caea13f578e493586d7
-                cloud_api_key: 
+                cloud_api_key: ${{ secrets.KURTOSIS_CLOUD_API_KEY }}
