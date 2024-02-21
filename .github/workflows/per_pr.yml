@@ -7,6 +7,8 @@ jobs:
     run_kurtosis:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4    
             - name: Run Kurtosis
               uses: kurtosis-tech/kurtosis-github-action@v1
               with:
