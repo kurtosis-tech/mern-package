@@ -70,7 +70,7 @@ You can access to the application in the browser by clicking or copying the `rea
 
 ### STEP 1
 
-Click ["Use this template"](https://github.com/benelferink/MERN-template/generate) to generate a new repository.
+Click ["Use this template"](https://github.com/kurtosis-tech/mern-package/generate) to generate a new repository based on this one.
 Then open your terminal and clone your repository:
 
 ```bash
