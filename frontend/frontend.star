@@ -1,10 +1,9 @@
-def run(plan, backend_service, backend_http_public_port):
+def run(plan):
     # upload frontend files
     frontend_files = plan.upload_files(
         src="./files/",
         name="frontend-files",
     )
-    backend_url = "http://localhost:{}".format(backend_http_public_port)
 
     service_config = ServiceConfig(
         image="node:16.14.2",
@@ -15,9 +14,7 @@ def run(plan, backend_service, backend_http_public_port):
         },
         entrypoint=["sh", "-c"],
         cmd=[
-            "cd /frontend/files/ && mkdir ./src/constants && echo \"export const BACKEND_URL = '{}' \" > ./src/constants/index.js && npm i && npm start".format(
-                backend_url
-            )
+            "cd /frontend/files/ && npm i && npm start"
         ],
         ports={
             "http": PortSpec(
@@ -26,12 +23,11 @@ def run(plan, backend_service, backend_http_public_port):
                 application_protocol="http",
             ),
         },
-        env_vars={
-            "BACKEND_URL": backend_url,
-        },
     )
 
-    plan.add_service(
+    frontend_service = plan.add_service(
         name="react-frontend",
         config=service_config,
     )
+
+    return frontend_service

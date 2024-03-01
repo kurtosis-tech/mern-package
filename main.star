@@ -1,7 +1,8 @@
 constants = import_module("/constants/constants.star")
 database = import_module("/database/database.star")
-express_backend = import_module("/backend/backend.star")
+backend = import_module("/backend/backend.star")
 frontend = import_module("/frontend/frontend.star")
+gateway = import_module("/gateway/gateway.star")
 
 
 def run(
@@ -42,7 +43,10 @@ def run(
     )
 
     # run the application's backend service
-    backend_service = express_backend.run(plan, mongodb_url, backend_http_public_port)
+    backend_service = backend.run(plan, mongodb_url, backend_http_public_port)
 
     # run the application's frontend service
-    frontend.run(plan, backend_service, backend_http_public_port)
+    frontend_service = frontend.run(plan)
+
+    # run the applications's gateway service
+    gateway.run(plan, frontend_service, backend_service)
