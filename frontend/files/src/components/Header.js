@@ -60,7 +60,7 @@ export default function Header() {
         transformOrigin={{vertical: 'top', horizontal: 'right'}}>
         <List style={{minWidth: '100px'}}>
           <ListSubheader style={{textAlign: 'center'}}>
-            Namaste, {isLoggedIn ? account.username : 'Dost'}
+            Hola, {isLoggedIn ? account.username : 'Amigo'}
           </ListSubheader>
 
           {isLoggedIn ? (
