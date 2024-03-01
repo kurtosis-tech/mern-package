@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth')
 async function bootstrap() {
   await mongo.connect()
 
-  app.get('/', (req, res) => res.status(200).json({message: 'Hello World!'}))
+  app.get('/', (req, res) => res.status(200).json({message: 'How are you mate?!'}))
   app.get('/healthz', (req, res) => res.status(200).send())
   app.use('/auth', authRoutes)
 
