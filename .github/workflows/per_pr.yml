@@ -13,5 +13,5 @@ jobs:
               uses: kurtosis-tech/kurtosis-github-action@v1
               with:
                 path: "."
-                cloud_instance_id: 086cc74ce8434caea13f578e493586d7
+                cloud_instance_id: 9cdd66e184754c3696e10de21b7726cd
                 cloud_api_key: ${{ secrets.KURTOSIS_CLOUD_API_KEY }}
