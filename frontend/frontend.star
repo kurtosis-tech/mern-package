@@ -23,6 +23,12 @@ def run(plan):
                 application_protocol="http",
             ),
         },
+        env_vars = {
+            # we set this in order to use the window.location.port value as the default value
+            # this way the WS call will go directly to the gateway's service and proxy it to the FE
+            # more here: https://create-react-app.dev/docs/advanced-configuration/
+            "WDS_SOCKET_PORT": "0",
+        },
     )
 
     frontend_service = plan.add_service(
