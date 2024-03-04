@@ -20,5 +20,5 @@ const LoggedInText = () => {
 }
 
 const LoggedOutText = () => (
-  <p>Don't forget to start your backend server, then authenticate yourself.</p>
+  <p>Authenticate yourself.</p>
 )

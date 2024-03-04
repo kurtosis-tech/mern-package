@@ -9,7 +9,7 @@ async function bootstrap() {
 
   app.get('/', (req, res) => res.status(200).json({message: 'Hello World!'}))
   app.get('/healthz', (req, res) => res.status(200).send())
-  app.use('/auth', authRoutes)
+  app.use('/backend', authRoutes)
 
   app.listen(PORT, () => {
     console.log(`✅ Server is listening on port: ${PORT}`)

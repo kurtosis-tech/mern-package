@@ -39,13 +39,6 @@ def run(plan, mongodb_url, backend_http_public_port):
                 application_protocol="http",
             ),
         },
-        public_ports={
-            "http": PortSpec(
-                number=backend_http_public_port,
-                transport_protocol="TCP",
-                application_protocol="http",
-            ),
-        },
     )
 
     backend_service = plan.add_service(

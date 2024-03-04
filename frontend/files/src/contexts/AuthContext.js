@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
   const register = (formData = {}) =>
     new Promise((resolve, reject) => {
       axios
-        .post('/auth/register', formData)
+        .post('/backend/register', formData)
         .then(({
           data: {
             data: accountData,
@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
   const login = (formData = {}) =>
     new Promise((resolve, reject) => {
       axios
-        .post('/auth/login', formData)
+        .post('/backend/login', formData)
         .then(({
           data: {
             data: accountData,
@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
           data: accountData,
           token: accessToken,
         },
-      } = await axios.get('/auth/login', {
+      } = await axios.get('/backend/login', {
         headers: {
           authorization: `Bearer ${token}`,
         },
