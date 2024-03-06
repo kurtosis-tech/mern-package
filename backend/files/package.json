@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
-    "start": "nodemon index.js || node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
