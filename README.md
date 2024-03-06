@@ -10,13 +10,9 @@ You can run this package very easily from the [Kurtosis cloud](https://cloud.kur
 
 #### Step 1
 
-Install [Kurtosis][install-kurtosis]
-
-#### Step 2
-
 Login into the [Kurtosis cloud](https://cloud.kurtosis.com/)
 
-#### Step 3
+#### Step 2
 
 Find the package in the catalog and press the `run` button
 <br />
