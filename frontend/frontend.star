@@ -14,7 +14,7 @@ def run(plan):
         },
         entrypoint=["sh", "-c"],
         cmd=[
-            "cd /frontend/files/ && npm i && npm start"
+            "cd /frontend/files/ && npm i && npm run build && npm install -g serve && serve -s build"
         ],
         ports={
             "http": PortSpec(
