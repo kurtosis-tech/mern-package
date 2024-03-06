@@ -10,7 +10,7 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v4    
             - name: Run Kurtosis
-              uses: kurtosis-tech/kurtosis-github-action@v1
+              uses: kurtosis-tech/kurtosis-github-action@main
               with:
                 path: "."
                 cloud_instance_id: 9cdd66e184754c3696e10de21b7726cd
