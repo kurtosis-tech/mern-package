@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: mongo:6.0.5
+    ports:
+      - 27017:27017
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    # starts the daemon and create the backend's database and user  
+    command: ["/bin/bash", "-c", "mongod && sleep 5 && mongosh -u root -p password -eval \"db.getSiblingDB('backend-db').createUser({user:'backend', pwd:'backend', roles:[{role:'readWrite',db:'backend-db'}]});\""]  
+
+  backend:
+    image: node:16.14.2
+    ports:
+      - 8080:8080
+
+volumes:
+  mongo-data:
