@@ -9,7 +9,7 @@ NGINX_IMAGE_NAME = "nginx:latest"
 def run(plan, frontend_service, backend_service):
 
     # upload Nginx config template
-    nginx_default_conf_contents = read_file(src="./template/default.conf")
+    nginx_default_conf_contents = read_file(src="./kurtosis-package-templates/default.conf")
     
     template_data = {
         "NginxPortNumber":NGINX_PORT_NUMBER,
