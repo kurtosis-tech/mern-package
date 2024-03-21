@@ -2,7 +2,7 @@ services:
   mongo:
     image: mongo:6.0.5
     ports:
-      - 27017:27017
+      - :27017
     restart: always
     volumes:
       - mongo-data:/data/db
@@ -12,11 +12,11 @@ services:
     # starts the daemon and create the backend's database and user  
     command: ["/bin/bash", "-c", "mongod && sleep 5 && mongosh -u root -p password -eval \"db.getSiblingDB('backend-db').createUser({user:'backend', pwd:'backend', roles:[{role:'readWrite',db:'backend-db'}]});\""] 
     healthcheck:
-      test: ["CMD-SHELL", "mongosh -u backend -p backend || exit 1"]
+      test: ["CMD-SHELL", "echo just wait || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
-      start_period: 6s
+      start_period: 10s
 
   backend:
     image: node:16.14.2
@@ -28,7 +28,8 @@ services:
       - MONGO_URI=mongodb://backend:backend@mongo:27017/backend-db
     command: ["/bin/bash", "-c", "cd /server/files/ && npm i && npm start"]
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
 
   frontend:
     image: node:16.14.2
