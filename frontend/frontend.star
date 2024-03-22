@@ -6,7 +6,10 @@ def run(plan):
     )
 
     service_config = ServiceConfig(
-        image="node:16.14.2",
+        image=ImageBuildSpec(
+            image_name="kurtosistech/mern-package-frontend",
+            build_context_dir="/frontend/files",
+        ),
         files={
             "/frontend/files": Directory(
                 artifact_names=[frontend_files],

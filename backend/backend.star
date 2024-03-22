@@ -6,7 +6,10 @@ def run(plan, mongodb_url, backend_http_public_port):
     )
 
     service_config = ServiceConfig(
-        image="node:16.14.2",
+        image=ImageBuildSpec(
+            image_name="kurtosistech/mern-package-backend",
+            build_context_dir="/backend/files",
+        ),
         files={
             "/server/files": Directory(
                 artifact_names=[server_files],

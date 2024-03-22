@@ -1,6 +1,6 @@
 FROM node:16.14.2
 
-COPY ./files /frontend/files
+COPY . /frontend/files
 
 WORKDIR /frontend/files
 

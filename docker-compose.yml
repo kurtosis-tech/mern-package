@@ -10,9 +10,8 @@ services:
       #- mongo-data:/data/db
 
   backend:
-    image: kurtosistech/mern-package-backend
     build:
-      context: ./backend
+      context: ./backend/files
     ports:
       - 8080:8080
     environment:
@@ -28,9 +27,8 @@ services:
       start_period: 3s
 
   frontend:
-    image: kurtosistech/mern-package-frontend
     build:
-      context: ./frontend
+      context: ./frontend/files
     ports:
       - 3000:3000
     environment:
