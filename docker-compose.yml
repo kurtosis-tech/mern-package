@@ -10,14 +10,14 @@ services:
       #- mongo-data:/data/db
 
   backend:
-    image: node:16.14.2
+    image: kurtosistech/mern-package-backend
+    build:
+      context: ./backend
     ports:
       - 8080:8080
-    volumes:
-      - ./backend/files:/server/files
     environment:
       - MONGO_URI=mongodb://admin:password@mongodb:27017
-    command: ["/bin/bash", "-c", "cd /server/files/ && npm i && npm start"]
+    command: ["/bin/bash", "-c", "cd /server/files/ && npm start"]
     depends_on:
       - mongodb
     healthcheck:
