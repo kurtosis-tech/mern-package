@@ -6,8 +6,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
-    volumes:
-      - mongo-data:/data/db
+    #volumes:
+      #- mongo-data:/data/db
 
   backend:
     image: node:16.14.2
@@ -21,29 +21,30 @@ services:
     depends_on:
       - mongodb
     healthcheck:
-      test: ["CMD-SHELL", "curl --fail localhost:8080/login"]
-      interval: 1m30s # improve this
-      timeout: 30s # improve this
-      retries: 5
-      start_period: 30s # improve this
+      test: ["CMD-SHELL", "curl --fail localhost:8080"]
+      interval: 10s
+      timeout: 30s
+      retries: 10
+      start_period: 3s
 
   frontend:
-    image: node:16.14.2
+    image: kurtosistech/mern-package-frontend
+    build:
+      context: ./frontend
     ports:
       - 3000:3000
-    volumes:
-      - ./frontend/files:/frontend/files
     environment:
       - WDS_SOCKET_PORT=0
-    command: ["/bin/bash", "-c", "cd /frontend/files/ && npm i && npm run build && npm install -g serve && serve -s build"]
+    command: ["/bin/bash", "-c", "cd /frontend/files/ && serve -s build"]
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl --fail localhost:3000"]
-      interval: 1m30s # improve this
-      timeout: 30s # improve this
-      retries: 5
-      start_period: 30s # improve this
+      interval: 30s
+      timeout: 30s
+      retries: 10
+      start_period: 30s
 
   gateway:
     image: nginx:latest
@@ -62,7 +63,6 @@ services:
       frontend:
         condition: service_healthy
 
-# Define named volumes
-volumes:
-  mongo-data:
-    driver: local
+#volumes:
+  #mongo-data:
+    #driver: local

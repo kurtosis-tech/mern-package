@@ -14,7 +14,6 @@ class MongoDB {
     if (this.isConnected) return
 
     try {
-      console.log("Connecting to with option...")
       const db = await this.mongoose.connect(this.MONGO_URI, this.MONGO_OPTIONS)
       const connection = db.connection
 
