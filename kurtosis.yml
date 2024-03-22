@@ -1,3 +1,5 @@
 name: "github.com/kurtosis-tech/mern-package"
 description: |
   This is a Kurtosis MERN template package you can use to create your own MERN project.
+replace:
+  github.com/kurtosis-tech/nginx-package: github.com/kurtosis-tech/nginx-package@lporoli/files-artifacts-argument

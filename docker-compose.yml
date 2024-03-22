@@ -2,7 +2,7 @@ services:
   mongodb:
     image: mongo:latest
     ports:
-      - "27017:27017"
+      - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
@@ -51,7 +51,7 @@ services:
     ports:
       - :80
     volumes:
-      - ./gateway/docker-compose-templates:/etc/nginx/templates
+      - ./gateway/templates:/etc/nginx/templates
     environment:
       - NGINX_PORT_NUMBER=80
       - NGINX_ROOT_FOLDER=/var/www/html

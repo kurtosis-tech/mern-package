@@ -8,36 +8,31 @@ NGINX_IMAGE_NAME = "nginx:latest"
 
 def run(plan, frontend_service, backend_service):
 
-    # upload Nginx config template
-    nginx_default_conf_contents = read_file(src="./kurtosis-package-templates/default.conf")
-    
-    template_data = {
-        "NginxPortNumber":NGINX_PORT_NUMBER,
-        "NginxRootFolder":NGINX_ROOT_DIRPATH,
-        "FrontendHost":frontend_service.hostname,
-        "FrontendPort":frontend_service.ports['http'].number,
-        "BackendHost":backend_service.hostname,
-        "BackendPort":backend_service.ports['http'].number,
+    nginx_templates = plan.upload_files(
+        src="./templates",
+        name="nginx-templates",
+    )
+
+    file_artifacts = {
+        "/etc/nginx/templates": nginx_templates,
     }
 
-    nginx_conf_file_artifact_name = plan.render_templates(
-        config={
-            "default.conf": struct(
-                template=nginx_default_conf_contents,
-                data=template_data,
-            ),
-        },
-        name="nginx_config",
-    )
-    
+    env_vars = {
+        "NGINX_PORT_NUMBER": "{}".format(NGINX_PORT_NUMBER),
+        "NGINX_ROOT_FOLDER": NGINX_ROOT_DIRPATH,
+        "FRONTEND_HOST": frontend_service.hostname,
+        "FRONTEND_PORT": "{}".format(frontend_service.ports['http'].number),
+        "BACKEND_HOST": backend_service.hostname,
+        "BACKEND_PORT": "{}".format(backend_service.ports['http'].number),
+    }
+
     nginx_args = {
         "name":NGINX_SERVICE_NAME,
         "image":NGINX_IMAGE_NAME,
-        "config_files_artifact":nginx_conf_file_artifact_name,
-        "root_dirpath":NGINX_ROOT_DIRPATH,
-        "root_file_artifact_name":"",
+        "file_artifacts":file_artifacts,
         "port_id":NGINX_PORT_ID,
-        "port_number":NGINX_PORT_NUMBER
+        "port_number":NGINX_PORT_NUMBER,
+        "env_vars":env_vars,
     }
 
     nginx.run(
