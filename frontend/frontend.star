@@ -24,7 +24,7 @@ def run(plan):
                 number=3000,
                 transport_protocol="TCP",
                 application_protocol="http",
-                wait="2m"
+                wait="5m"
             ),
         },
         env_vars = {
