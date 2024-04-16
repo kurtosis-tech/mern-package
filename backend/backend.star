@@ -5,30 +5,15 @@ def run(plan, mongodb_url, backend_http_public_port):
         name="server-files",
     )
 
-    # upload template
-    template_file_contents = read_file(src="./template/index.js")
-
-    template_data = {
-        "MongoURI": mongodb_url,
-    }
-
-    server_constants = plan.render_templates(
-        config={
-            "index.js": struct(
-                template=template_file_contents,
-                data=template_data,
-            ),
-        },
-        name="server-constants",
-    )
-
     service_config = ServiceConfig(
-        image="node:16.14.2",
+        image=ImageBuildSpec(
+            image_name="kurtosistech/mern-package-backend",
+            build_context_dir="/backend/files",
+        ),
         files={
             "/server/files": Directory(
                 artifact_names=[server_files],
             ),
-            "/server/constants": server_constants,
         },
         entrypoint=["sh", "-c"],
         cmd=["cd /server/files/ && npm i && npm start"],
@@ -38,6 +23,9 @@ def run(plan, mongodb_url, backend_http_public_port):
                 transport_protocol="TCP",
                 application_protocol="http",
             ),
+        },
+        env_vars = {
+            "MONGO_URI": mongodb_url,
         },
     )
 

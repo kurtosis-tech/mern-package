@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const {MONGO_URI} = require('../../constants')
-const {MONGO_OPTIONS} = require('../../constants')
+const {MONGO_URI} = require('../constants')
+const {MONGO_OPTIONS} = require('../constants')
 
 class MongoDB {
   constructor() {

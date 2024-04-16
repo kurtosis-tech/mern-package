@@ -1,7 +1,7 @@
 require('dotenv').config() // Secures variables
 const app = require('./utils/app') // Backend App (server)
 const mongo = require('./utils/mongo') // MongoDB (database)
-const {PORT} = require('../constants')
+const {PORT} = require('./constants')
 const authRoutes = require('./routes/auth')
 
 async function bootstrap() {

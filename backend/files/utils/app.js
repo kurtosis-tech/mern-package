@@ -1,6 +1,6 @@
 const express = require('express') // Backend App (server)
 const cors = require('cors') // HTTP headers (enable requests)
-const {ORIGIN} = require('../../constants')
+const {ORIGIN} = require('../constants')
 
 // initialize app
 const app = express()
